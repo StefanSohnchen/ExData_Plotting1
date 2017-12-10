@@ -1,6 +1,8 @@
-data <- read.table("household_power_consumption.txt", sep=";", header = T,
-                  stringsAsFactors = FALSE, dec = ".")
+# download dataset to working directory and the read the file into RStudio
 
+data <- read.table("household_power_consumption.txt", sep=";", header = T, stringsAsFactors = FALSE, dec = ".")
+
+# subset the required data
 
 data <- subset(data, data$Date %in% c("1/2/2007","2/2/2007"))
 
@@ -13,6 +15,9 @@ data$Sub_metering_2 <- as.numeric(data$Sub_metering_2)
 data$Sub_metering_3 <- as.numeric(data$Sub_metering_3)
 data$Voltage<- as.numeric(data$Voltage)
 data$Global_reactive_power<- as.numeric(data$Global_reactive_power)
+
+
+# save the file as "plot4.png" in working directory and create plot
 
 png("plot4.png", width = 480, height = 480)
 par(mfrow=c(2,2), mar=c(4,4,2,1))
@@ -28,5 +33,7 @@ with(data,{
   plot(datetime, data$Global_reactive_power, type = "l", xlab = "datetime", ylab = "Energy sub metering")
   
 })
+
+# dev is closed
 
 dev.off()
